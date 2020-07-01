@@ -1,0 +1,25 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class dragDrop {
+
+	public static void main(String[] args) {
+		System.setProperty("webdriver.chrome.driver", "C:\\Drivers\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().window().maximize();// maximize window
+		driver.get("http://testautomationpractice.blogspot.com/"); // url
+		Actions action = new Actions(driver);
+		
+		
+		WebElement source = driver.findElement(By.xpath("//p[contains(text(),'Drag me to my target')]"));
+		WebElement target = driver.findElement(By.id("droppable"));
+
+		action.dragAndDrop(source, target).build().perform();
+
+	}
+
+}

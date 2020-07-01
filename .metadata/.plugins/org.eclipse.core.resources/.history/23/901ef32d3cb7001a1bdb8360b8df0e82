@@ -1,0 +1,35 @@
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
+
+public class e2e {
+
+	public static void main(String[] args) {
+		System.setProperty("webdriver.chrome.driver", "C:\\Drivers\\chromedriver.exe");
+
+		WebDriver driver = new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().window().maximize();// maximize window
+		driver.get("https://cleartrip.com"); // url
+		Select s = new Select(driver.findElement(By.id("Adults"))); // important SELECT CLASS!!!
+		s.selectByValue("2");
+		Select c = new Select(driver.findElement(By.id("Childrens"))); // important SELECT CLASS!!!
+		c.selectByValue("3");
+		driver.findElement(By.id("DepartDate")).click();
+		driver.findElement(By.xpath("//a[contains(@class,'ui-state-default ui-state-highlight')]")).click();
+		driver.findElement(By.xpath("//strong[contains(text(),'More options:')]")).click();
+		driver.findElement(By.id("AirlineAutocomplete")).sendKeys("indigo");
+		driver.findElement(By.cssSelector("input#SearchBtn")).click();
+		String aaa = driver.findElement(By.id("homeErrorMessage")).getText();
+		System.out.println(aaa);
+		Assert.assertEquals(aaa, "Sorry, but we can't continue until you fix everything that's marked in RED");
+		driver.quit();
+
+	}
+
+}

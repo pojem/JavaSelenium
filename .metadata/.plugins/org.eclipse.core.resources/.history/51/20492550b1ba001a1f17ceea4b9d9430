@@ -1,0 +1,41 @@
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class table {
+
+	public static void main(String[] args) {
+		System.setProperty("webdriver.chrome.driver", "C:\\Drivers\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		driver.manage().window().maximize();// maximize window
+		driver.get("https://www.seleniumeasy.com/test/table-data-download-demo.html"); // url
+
+		WebElement table = driver.findElement(By.id("example"));
+		
+		
+		
+		
+		
+		
+		int size = table.findElements(By.tagName("tr")).size();
+		
+		for(int row=0; row<size;row++) {
+			System.out.println("########");
+			for (int col=0; col<5;col++) {
+				
+				System.out.println(table.findElements(By.tagName("td")).get(col).getText());
+
+				
+			}
+			
+		}
+		
+		
+		
+	}
+
+}

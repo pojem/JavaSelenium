@@ -1,0 +1,14 @@
+
+public class Methods {
+
+public int ValidateHeader()
+{
+System.out.println("header links validated");		
+return 2;
+}
+
+
+
+}
+
+ 
